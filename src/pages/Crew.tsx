@@ -55,7 +55,7 @@ export default function Crew(){
                         </nav>
                     </div>
                     <div className="relative w-68 h-85 sm:w-[447px] sm:h-140 lg:w-[540px] lg:h-169 overflow-hidden mx-auto">
-                        <img src={images[role!]} alt="" className="w-full h-full object-cover max-sm:mask-gradient lg:mask-gradient"/>
+                        <img src={images[role!]} alt="" className="w-full h-full object-contain sm:object-cover max-sm:mask-gradient lg:mask-gradient"/>
                     </div>
                 </section>
             </main>
