@@ -5,6 +5,7 @@ import mars from '../assets/destination/image-mars.webp'
 import titan from '../assets/destination/image-titan.webp'
 import europa from '../assets/destination/image-europa.webp'
 import data from '../data.json'
+import { useEffect, useState } from "react";
 
 interface Destination{
     name: string
@@ -14,14 +15,23 @@ interface Destination{
     [key:string] : any
 }
 
-const images: Record<string,string> = {
-    moon : moon,
-    mars : mars,
-    titan : titan,
-    europa: europa
-}
-
 export default function Destination(){
+    const images: Record<string,string> = {
+        moon : moon,
+        mars : mars,
+        titan : titan,
+        europa: europa
+    }
+
+    useEffect(()=>{
+    let imageSrcLinksArray = Object.values(images)
+    imageSrcLinksArray.forEach(link=>{
+        const img = new Image()
+        img.src = link
+    })
+    },[])
+
+    
 
     const destinationData:Destination[] = data.destinations
     const links = destinationData.map(d => {
@@ -43,7 +53,8 @@ export default function Destination(){
         return <Navigate to='/not%20found' replace/>    
     }
     
-    const current = destinationData.find(d => d.name.toLowerCase() === name?.toLowerCase()) 
+    const current = destinationData.find(d => d.name.toLowerCase() === name?.toLowerCase())
+
     return (
         <PageLayout bgImg="bg-destination">
             <main className="m-6 sm:m-10 lg:my-12 lg:mx-41 grow flex flex-col gap-12 sm:gap-[66px] lg:gap-[157px] items-center">
@@ -52,7 +63,7 @@ export default function Destination(){
                     <span className="text-preset-8 sm:text-preset-5-tab lg:text-preset-5">PICK YOUR DESTINATION</span>
                 </h3>
                 <section className="flex flex-col lg:flex-row gap-8 sm:gap-[73px] lg:gap-[109px] grow sm:mx-[87px]">
-                    <div className="w-[150px] h-[150px] mx-auto sm:w-[300px] sm:h-[300px] ">
+                    <div className='w-[150px] h-[150px] mx-auto sm:w-[300px] sm:h-[300px]'>
                         <img key={current?.name} src={images[name!]} alt={current?.name} />
                     </div>
                     <div className="flex flex-col gap-6 items-center lg:w-[445px] lg:items-start">

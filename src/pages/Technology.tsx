@@ -12,6 +12,7 @@ export default function Technology(){
     interface Technology{
         name: string
         description: string
+        [key:string] : any
     }
 
     const technology = data.technology as Technology[]
