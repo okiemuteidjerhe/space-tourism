@@ -1,5 +1,5 @@
 import PageLayout from "../layout/PageLayout";
-import { NavLink, useParams } from "react-router-dom";
+import { Navigate, NavLink, useParams } from "react-router-dom";
 import moon from "../assets/destination/image-moon.webp"
 import mars from '../assets/destination/image-mars.webp'
 import titan from '../assets/destination/image-titan.webp'
@@ -36,7 +36,13 @@ export default function Destination(){
             )
     })
     
+    const validParams = ['moon', 'mars', 'titan', 'europa']
     const {name} = useParams<{name:string}>();
+
+    if(!validParams.includes(name!)){
+        return <Navigate to='/not%20found' replace/>    
+    }
+    
     const current = destinationData.find(d => d.name.toLowerCase() === name?.toLowerCase()) 
     return (
         <PageLayout bgImg="bg-destination">
@@ -47,7 +53,7 @@ export default function Destination(){
                 </h3>
                 <section className="flex flex-col lg:flex-row gap-8 sm:gap-[73px] lg:gap-[109px] grow sm:mx-[87px]">
                     <div className="w-[150px] h-[150px] mx-auto sm:w-[300px] sm:h-[300px] ">
-                        <img src={images[name!]} alt={current?.name} />
+                        <img key={current?.name} src={images[name!]} alt={current?.name} />
                     </div>
                     <div className="flex flex-col gap-6 items-center lg:w-[445px] lg:items-start">
                         <nav className="px-10 lg:pl-0 flex gap-8">

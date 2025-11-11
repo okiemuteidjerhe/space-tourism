@@ -1,10 +1,11 @@
 import PageLayout from "../layout/PageLayout";
 import data from '../data.json'
-import { NavLink, useParams } from "react-router-dom";
+import { Navigate, NavLink, useParams } from "react-router-dom";
 import Commander from '../assets/crew/image-douglas-hurley.webp'
 import Mission_Specialist from '../assets/crew/image-mark-shuttleworth.webp'
 import Pilot from '../assets/crew/image-victor-glover.webp'
 import Flight_Engineer from '../assets/crew/image-anousheh-ansari.webp'
+/* import NotFound from "./NotFound"; */
 
 export default function Crew(){
     interface Crew{
@@ -22,7 +23,17 @@ export default function Crew(){
     }
 
     const crew = data.crew as Crew[]
+
+    const validParams = ['commander', 'mission specialist', 'flight engineer', 'pilot']
     const { role } = useParams<{role:string}>()
+
+    if(!validParams.includes(role!)) {
+        return <Navigate to='/not%20found' replace />
+        /* return <NotFound/> */
+    }
+        
+    
+
     const current = crew.find(c => c.role.toLowerCase() === role?.toLowerCase())
 
     const navLinks = crew.map(c => {
@@ -55,7 +66,7 @@ export default function Crew(){
                         </nav>
                     </div>
                     <div className="relative w-68 h-85 sm:w-[447px] sm:h-140 lg:w-[540px] lg:h-169 overflow-hidden mx-auto">
-                        <img src={images[role!]} alt="" className="w-full h-full object-contain sm:object-cover max-sm:mask-gradient lg:mask-gradient"/>
+                        <img key={current?.role} src={images[role!]} alt="" className="w-full h-full object-contain sm:object-cover max-sm:mask-gradient lg:mask-gradient"/>
                     </div>
                 </section>
             </main>

@@ -6,7 +6,7 @@ import spaceportLandscape from '../assets/technology/image-spaceport-landscape.j
 import spaceCapsuleLandscape from '../assets/technology/image-space-capsule-landscape.jpg'
 import spaceCapsulePortrait from '../assets/technology/image-space-capsule-portrait.jpg'
 import data from '../data.json'
-import { NavLink, useParams } from "react-router-dom";
+import { Navigate, NavLink, useParams } from "react-router-dom";
 
 export default function Technology(){
     interface Technology{
@@ -16,7 +16,13 @@ export default function Technology(){
 
     const technology = data.technology as Technology[]
 
+    const validParams = ['launch vehicle', 'space capsule', 'spaceport']
+
     const { name } = useParams()
+
+    if(!validParams.includes(name!)){
+        return <Navigate to='/not%20found' replace/>
+    }
 
     const current = technology.find(t => t.name.toLowerCase() === name?.toLowerCase())
 
@@ -56,7 +62,7 @@ export default function Technology(){
                     <span className="text-preset-8 sm:text-preset-5-tab lg:text-preset-5">SPACE LAUNCH 101</span>
                 </h3>
                 <section className="flex flex-col gap-8 lg:flex-row-reverse">
-                    <picture className="h-[322px] sm:h-[357px] lg:h-[600px]  overflow-hidden mt-16">
+                    <picture key={current?.name} className="h-[322px] sm:h-[357px] lg:h-[600px]  overflow-hidden mt-16">
                         <source media="(min-width: 64rem)" srcSet={images[name!].portrait}/>
                         <source media="(min-width: 40rem)" srcSet={images[name!].landscape}/>
                         <img src={images[name!].portrait} alt={current?.name} className="w-full h-full  object-cover " />
