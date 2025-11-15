@@ -62,13 +62,21 @@ export default function Header(){
             </nav>
                 
             <button 
+                aria-label="menu button"
+                aria-controls="menu"
+                aria-expanded = {isOpen}
+                aria-haspopup = 'true'
                 onClick={handleToggle}
                 className="block z-9 sm:hidden w-6"
             >
                 <img src={isOpen? close : hamburger} alt="" />
             </button>
 
-            <nav aria-label="Desktop/Tab" className={`absolute ${isOpen ? "block" : "hidden"} sm:hidden bg-Blue-900/0 backdrop-blur-xl h-dvh w-[256px] top-0 right-0 pl-8`}>
+            <nav 
+                id="menu"
+                aria-labelledby="menu button" 
+                className={`absolute ${isOpen ? "block" : "hidden"} sm:hidden bg-Blue-900/0 backdrop-blur-xl h-dvh w-[256px] top-0 right-0 pl-8`}
+            >
             <ul className="flex flex-col text-left gap-8 mt-[133px]">
                 <li>
                         <NavLink 

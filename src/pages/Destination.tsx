@@ -5,7 +5,6 @@ import mars from '../assets/destination/image-mars.webp'
 import titan from '../assets/destination/image-titan.webp'
 import europa from '../assets/destination/image-europa.webp'
 import data from '../data.json'
-import { useEffect, useState } from "react";
 
 interface Destination{
     name: string
@@ -23,13 +22,13 @@ export default function Destination(){
         europa: europa
     }
 
-    useEffect(()=>{
+    /* useEffect(()=>{
     let imageSrcLinksArray = Object.values(images)
     imageSrcLinksArray.forEach(link=>{
         const img = new Image()
         img.src = link
     })
-    },[])
+    },[]) */
 
     
 

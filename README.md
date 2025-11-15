@@ -17,4 +17,3 @@ This is a solution to the [Space tourism website challenge on Frontend Mentor](h
 I learned about CSS Mask. 
 I refreshed my routing knowledge. Made use of useParams hook.
 I learned about nesting media queries in @utility
-I learned about Image() and using it for caching to improve image load time for my in page dynamic routing.
